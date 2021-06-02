@@ -26,7 +26,7 @@ public class gui extends JFrame implements ActionListener {
 
         // set window object size
         GUI.setSize(800, 450);
-        GUI.setTitle("Library Database");
+        GUI.setTitle("Library Management System");
         GUI.setVisible(true);
         GUI.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
@@ -40,61 +40,61 @@ public class gui extends JFrame implements ActionListener {
 
         // intro label
         introLbl = new JLabel();
-        introLbl.setBounds(10, 10, 300, 20);
-        introLbl.setText("Quick intro to app");
-
+        introLbl.setBounds(10, 5, 300, 20);
+        //introLbl.setSize(10,10);
+        introLbl.setText("Quick Search");
 
         //1
-        lbl1 = new JLabel("input1");
+        lbl1 = new JLabel("Member ID");
         lbl1.setBounds(10, 30, 80, 20);
         txtfld1 = new JTextField();
-        txtfld1.setBounds(70, 30, 100, 20);
+        txtfld1.setBounds(80, 30, 100, 20);
 
         //2
-        lbl2 = new JLabel("input2");
+        lbl2 = new JLabel("ISBN No");
         lbl2.setBounds(10, 60, 80, 20);
         txtfld2 = new JTextField();
-        txtfld2.setBounds(70, 60, 100, 20);
+        txtfld2.setBounds(80, 60, 100, 20);
 
         // 3
-        lbl3 = new JLabel("input3");
+        lbl3 = new JLabel("Reserve Date");
         lbl3.setBounds(10, 90, 80, 20);
         txtfld3 = new JTextField();
-        txtfld3.setBounds(70, 90, 100, 20);
+        txtfld3.setBounds(80, 90, 100, 20);
 
         // 4
-        lbl4 = new JLabel("input4");
-        lbl4.setBounds(10, 90, 80, 20);
+        lbl4 = new JLabel("Hold");
+        lbl4.setBounds(10, 120, 80, 20);
         txtfld4 = new JTextField();
-        txtfld4.setBounds(70, 90, 100, 20);
+        txtfld4.setBounds(80, 120, 100, 20);
 
         // 5
-        lbl5 = new JLabel("input5");
-        lbl5.setBounds(10, 90, 80, 20);
+        lbl5 = new JLabel("Genre ID");
+        lbl5.setBounds(10, 150, 80, 20);
         txtfld5 = new JTextField();
-        txtfld5.setBounds(70, 90, 100, 20);
+        txtfld5.setBounds(80, 150, 100, 20);
 
         // 6
-        lbl6 = new JLabel("input6");
-        lbl6.setBounds(10, 90, 80, 20);
+        lbl6 = new JLabel("Inventory");
+        lbl6.setBounds(10, 180, 80, 20);
         txtfld6 = new JTextField();
-        txtfld6.setBounds(70, 90, 100, 20);
+        txtfld6.setBounds(80, 180, 100, 20);
 
         // 7
-        lbl7 = new JLabel("input7");
-        lbl7.setBounds(10, 90, 80, 20);
+        lbl7 = new JLabel("Vendor ID");
+        lbl7.setBounds(10, 210, 80, 20);
         txtfld7 = new JTextField();
-        txtfld7.setBounds(70, 90, 100, 20);
+        txtfld7.setBounds(80, 210, 100, 20);
 
         // generate button
         btn1 = new JButton("button!");
-        btn1.setBounds(10, 200, 100, 20);
+        btn1.setBounds(10, 240, 100, 20);
 
         //add listener to button
         btn1.addActionListener(this);
 
         //text area output (with formatted font)
-        txtArea1 = new JTextArea("My Text Area!");
+        txtArea1 = new JTextArea("Results!");
         txtArea1.setFont(new Font("monospaced", Font.PLAIN, 12));
         txtArea1.setBounds(250, 20, 500, 350);
 
@@ -103,9 +103,17 @@ public class gui extends JFrame implements ActionListener {
         pane.add(lbl1);
         pane.add(lbl2);
         pane.add(lbl3);
+        pane.add(lbl4);
+        pane.add(lbl5);
+        pane.add(lbl6);
+        pane.add(lbl7);
         pane.add(txtfld1);
         pane.add(txtfld2);
         pane.add(txtfld3);
+        pane.add(txtfld4);
+        pane.add(txtfld5);
+        pane.add(txtfld6);
+        pane.add(txtfld7);
         pane.add(btn1);
         pane.add(txtArea1);
     }
