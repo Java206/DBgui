@@ -9,68 +9,30 @@ import java.sql.*;
  *
  * @author Brandon Soto
  */
-public final class dataBase {
+public class dataBase {
 
-
-    public static final String DBNAME = "Takele_Abrham_db";  // Like "testDB"
-
-    /**
-     * JDBC driver name and database URL
-     */
-    public static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-
-    /**
-     * Gives access to all Databases
-     */
-    static final String ALL_DBS_URL = "jdbc:mysql://localhost/?allowPublicKeyRetrieval=true&autoReconnect=true&useSSL=false";
-
-    /**
-     * Gives access to a given DB
-     */
-    static final String GIVEN_DB_URL = "jdbc:mysql://localhost/" + DBNAME + "?allowPublicKeyRetrieval=true&autoReconnect=true&useSSL=false";
 
     // Below are the USERNAME and PASSWORD used in mysql
     public static final String USER = "root";
     public static final String PASS = "ABab1234";
 
-    /**
-     * A variable for connecting to MySQL Server
-     */
-    public static Connection conn = null;
+    public dataBase() throws SQLException {}
 
-    /**
-     * A variable for Preparing Statements
-     */
-    public static PreparedStatement ps = null;
+    public void connectToDatabase() {
+        try {
+            // Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/Takele_Abrham_db", USER, PASS);
+            //here sonoo is database name, root is username and password
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select * from Book");
+            while (rs.next())
+                // System.out.println(rs);
+                System.out.println(rs.getInt(1) + "  " + rs.getString(2) + "  " + rs.getString(3) + "  " + rs.getString(4) + "  " + rs.getString(5) + "  " + rs.getString(6));
+            con.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
 
-    public static void main(String[] args)
-            throws ClassNotFoundException, SQLException {
-        // Register JDBC driver
-        Class.forName(JDBC_DRIVER);
-
-        // Open a connection with MySQL server
-        System.out.println("Connecting to all Databases path...");
-        conn = DriverManager.getConnection(ALL_DBS_URL, USER, PASS);
-        System.out.println("Connected to all Databases!");
-
-        // Test if there is the db in MySQL Server
-        // if not then create one
-        System.out.println("Testing if " + DBNAME + " exists...");
-        ps = conn.prepareStatement("CREATE DATABASE IF NOT EXISTS " + DBNAME + ";");
-        ps.executeUpdate();
-        // Now db exists for sure!
-
-        // Open a connection with given DB
-        System.out.println("Connecting to " + DBNAME + " path...");
-        conn = DriverManager.getConnection(GIVEN_DB_URL, USER, PASS);
-        System.out.println("Connected to " + DBNAME + "!");
-
-        // then you can do all sort of queries that you want to do
-        Statement stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery("select * from Member");
-        while (rs.next())
-            System.out.println(rs.getInt(1) + "  " + rs.getString(2) + "  " + rs.getString(3));
-        conn.close();
-        System.out.println("there");
     }
 }

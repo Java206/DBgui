@@ -1,48 +1,31 @@
 package GUI;
 
 
+import DataBase.dataBase;
+import DataBase.dbTables;
 import com.mysql.cj.result.OffsetDateTimeValueFactory;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 
 public class gui extends JFrame implements ActionListener {
 
     private static final long serialVersionUID = 7250653526959884601L;
 
-
     // declare some things we need
     private JLabel introLbl, lbl1, lbl2, lbl3, lbl4, lbl5, lbl6, lbl7;
     private JTextField txtfld1, txtfld2, txtfld3, txtfld4, txtfld5, txtfld6, txtfld7;
-    private JButton btn1;
+    private JButton btn1, btn2;
     private JTextArea txtArea1;
 
+    public dataBase data;
+    public Connection con;
+    public dbTables t;
 
-    public static void main(String[] args) {
-            //createGUI();
-        try {
-            // Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/Takele_Abrham_db", "root", "ABab1234");
-            //here sonoo is database name, root is username and password
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("select * from Book");
-            while (rs.next())
-               // System.out.println(rs);
-            System.out.println(rs.getInt(1)+"  "+rs.getString(2)+"  "+rs.getString(3 ) +"  "+rs.getString(4)+"  "+rs.getString(5)+"  "+rs.getString(6));
-            con.close();
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-    }
-
-        public static void createGUI () {
+        public void createGUI () {
 
 
             // make window object
@@ -115,11 +98,25 @@ public class gui extends JFrame implements ActionListener {
             btn1 = new JButton("button!");
             btn1.setBounds(10, 240, 100, 20);
 
+            // generate button
+            btn2 = new JButton("Test!");
+            btn2.setBounds(10, 270, 100, 20);
+
+            btn2.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    try {
+                        txtArea1.setText(t.memberTable());
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
+                    }
+                }
+            });
             //add listener to button
-            btn1.addActionListener(this);
+            btn2.addActionListener(this);
 
             //text area output (with formatted font)
-            txtArea1 = new JTextArea("rs");
+            txtArea1 = new JTextArea("hello!");
             txtArea1.setFont(new Font("monospaced", Font.PLAIN, 12));
             txtArea1.setBounds(250, 20, 500, 350);
 
@@ -140,6 +137,7 @@ public class gui extends JFrame implements ActionListener {
             pane.add(txtfld6);
             pane.add(txtfld7);
             pane.add(btn1);
+            pane.add(btn2);
             pane.add(txtArea1);
         }
 
@@ -148,25 +146,31 @@ public class gui extends JFrame implements ActionListener {
 
         @Override
         public void actionPerformed (ActionEvent e){
+//
+//            btn2.addActionListener(new ActionListener() {
+//                @Override
+//                public void actionPerformed(ActionEvent e) {
+//                    txtArea1.setText("It worked!!!");
+//                }
+//            });
 
-
-            try {
-                //parse some data from input
-                int temp1 = Integer.parseInt(txtfld1.getText());
-                int temp2 = Integer.parseInt(txtfld2.getText());
-
-                //do what we want to do with whatever data
-
-
-                //basic error catching
-            } catch (NumberFormatException ex) {
-                System.out.println("Exception: " + ex);
-                JOptionPane.showMessageDialog(this, "Please enter a warning message");
-            } catch (ArrayIndexOutOfBoundsException ex) {
-                //warnings..
-            } catch (NegativeArraySizeException ex) {
-                //warnings..
-            }
+//            try {
+//                //parse some data from input
+//                int temp1 = Integer.parseInt(txtfld1.getText());
+//                int temp2 = Integer.parseInt(txtfld2.getText());
+//
+//                //do what we want to do with whatever data
+//
+//
+//                //basic error catching
+//            } catch (NumberFormatException ex) {
+//                System.out.println("Exception: " + ex);
+//                JOptionPane.showMessageDialog(this, "Please enter a warning message");
+//            } catch (ArrayIndexOutOfBoundsException ex) {
+//                //warnings..
+//            } catch (NegativeArraySizeException ex) {
+//                //warnings..
+//            }
         }
 
 }
