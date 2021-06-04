@@ -2,28 +2,25 @@ package GUI;
 
 
 import DataBase.dataBase;
-import DataBase.dbTables;
-import com.mysql.cj.result.OffsetDateTimeValueFactory;
+import DataBase.Scenarios;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.Serial;
 import java.sql.*;
 
 public class gui extends JFrame implements ActionListener {
 
+    @Serial
     private static final long serialVersionUID = 7250653526959884601L;
 
     // declare some things we need
     private JLabel introLbl, lbl1, lbl2, lbl3, lbl4, lbl5, lbl6, lbl7;
-    private JTextField txtfld1, txtfld2, txtfld3, txtfld4, txtfld5, txtfld6, txtfld7;
+    public JTextField txtfld1, txtfld2, txtfld3, txtfld4, txtfld5, txtfld6, txtfld7;
     private JButton btn1, btn2;
     private JTextArea txtArea1;
-
-    public dataBase data;
-    public Connection con;
-    public dbTables t;
 
         public void createGUI () {
 
@@ -33,7 +30,7 @@ public class gui extends JFrame implements ActionListener {
             GUI.init(); // init all our things!
 
             // set window object size
-            GUI.setSize(800, 450);
+            GUI.setSize(1000, 600);
             GUI.setTitle("Library Management System");
             GUI.setVisible(true);
             GUI.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -48,77 +45,84 @@ public class gui extends JFrame implements ActionListener {
 
             // intro label
             introLbl = new JLabel();
+            introLbl.setFont(new Font("Tahoma", Font.PLAIN, 20));
             introLbl.setBounds(10, 5, 300, 20);
             //introLbl.setSize(10,10);
             introLbl.setText("Quick Search");
 
             //1
             lbl1 = new JLabel("Member ID");
-            lbl1.setBounds(10, 30, 80, 20);
+            lbl1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+            lbl1.setBounds(10, 60, 100, 25);
             txtfld1 = new JTextField();
-            txtfld1.setBounds(80, 30, 100, 20);
+            txtfld1.setBounds(120, 60, 100, 25);
 
             //2
             lbl2 = new JLabel("ISBN No");
-            lbl2.setBounds(10, 60, 80, 20);
+            lbl2.setFont(new Font("Tahoma", Font.PLAIN, 20));
+            lbl2.setBounds(10, 100, 100, 25);
             txtfld2 = new JTextField();
-            txtfld2.setBounds(80, 60, 100, 20);
+            txtfld2.setBounds(120, 100, 100, 25);
 
             // 3
             lbl3 = new JLabel("Reserve Date");
-            lbl3.setBounds(10, 90, 80, 20);
+            lbl3.setFont(new Font("Tahoma", Font.PLAIN, 20));
+            lbl3.setBounds(10, 140, 100, 25);
             txtfld3 = new JTextField();
-            txtfld3.setBounds(80, 90, 100, 20);
+            txtfld3.setBounds(120, 140, 100, 25);
 
             // 4
             lbl4 = new JLabel("Hold");
-            lbl4.setBounds(10, 120, 80, 20);
+            lbl4.setFont(new Font("Tahoma", Font.PLAIN, 20));
+            lbl4.setBounds(10, 180, 100, 25);
             txtfld4 = new JTextField();
-            txtfld4.setBounds(80, 120, 100, 20);
+            txtfld4.setBounds(120, 180, 100, 25);
 
             // 5
             lbl5 = new JLabel("Genre ID");
-            lbl5.setBounds(10, 150, 80, 20);
+            lbl5.setFont(new Font("Tahoma", Font.PLAIN, 20));
+            lbl5.setBounds(10, 220, 100, 25);
             txtfld5 = new JTextField();
-            txtfld5.setBounds(80, 150, 100, 20);
+            txtfld5.setBounds(120, 220, 100, 25);
 
             // 6
             lbl6 = new JLabel("Inventory");
-            lbl6.setBounds(10, 180, 80, 20);
+            lbl6.setFont(new Font("Tahoma", Font.PLAIN, 20));
+            lbl6.setBounds(10, 260, 100, 25);
             txtfld6 = new JTextField();
-            txtfld6.setBounds(80, 180, 100, 20);
+            txtfld6.setBounds(120, 260, 100, 25);
 
             // 7
             lbl7 = new JLabel("Vendor ID");
-            lbl7.setBounds(10, 210, 80, 20);
+            lbl7.setFont(new Font("Tahoma", Font.PLAIN, 20));
+            lbl7.setBounds(10, 300, 100, 25);
             txtfld7 = new JTextField();
-            txtfld7.setBounds(80, 210, 100, 20);
+            txtfld7.setBounds(120, 300, 100, 25);
 
             // generate button
             btn1 = new JButton("button!");
-            btn1.setBounds(10, 240, 100, 20);
+            btn1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+            btn1.setBounds(10, 350, 100, 20);
 
             // generate button
-            btn2 = new JButton("Test!");
-            btn2.setBounds(10, 270, 100, 20);
+            btn2 = new JButton("New Memeber");
+            btn2.setFont(new Font("Tahoma", Font.PLAIN, 20));
+            btn2.setBounds(375, 500, 200, 25);
 
-            btn2.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    try {
-                        txtArea1.setText(t.memberTable());
-                    } catch (SQLException throwables) {
-                        throwables.printStackTrace();
-                    }
-                }
+            btn2.addActionListener(e -> {
+                newMemberWindow jfrm1= new newMemberWindow();
+                jfrm1.setVisible(true);
+                setDefaultCloseOperation(EXIT_ON_CLOSE);
+                dispose();
+
             });
             //add listener to button
             btn2.addActionListener(this);
 
             //text area output (with formatted font)
             txtArea1 = new JTextArea("hello!");
-            txtArea1.setFont(new Font("monospaced", Font.PLAIN, 12));
-            txtArea1.setBounds(250, 20, 500, 350);
+            txtArea1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+            txtArea1.setBounds(350, 20, 500, 350);
 
             //add all of the things to the pane
             pane.add(introLbl);
