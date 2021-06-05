@@ -1,13 +1,23 @@
 package DataBase;
 
 import java.sql.*;
-
+/**
+ * A class to call the queries on the first page
+ *
+ * @author Abrham Takele
+ */
 public class Scenarios {
     public dataBase data;
     public Scenarios(){
         data = new dataBase();
     }
 
+    /**
+     * This class will get the user_Id from members table
+     * by sending the query to our database
+     * @param s1 a String sent by the listener
+     * @return returns string
+     */
     public String getMemberInfo(String s1) throws SQLException {
 
         String query = "select * from Member where User_Id = " + s1 ;
@@ -35,7 +45,12 @@ public class Scenarios {
 
         return s.toString();
     }
-
+    /**
+     * This class will get the ISBN_Number from Book table
+     * by sending the query to our database
+     * @param s2 a String sent by the listener
+     * @return returns string
+     */
     public String book(String s2) throws SQLException {
 
         String bookQuery = "select * from Book where ISBN_Number = " + s2 ;

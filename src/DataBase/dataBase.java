@@ -11,13 +11,15 @@
      */
     public class dataBase {
         public Connection con;
-        //here sonoo is database name, root is username and password
         public Statement stmt;
-    public Scenarios t;
+
         // Below are the USERNAME and PASSWORD used in mysql
         public static final String USER = "root";
         public static final String PASS = "ABab1234";
 
+        /**
+         * A class to connect to out database
+         */
         public dataBase() {
 
             try {
@@ -38,11 +40,15 @@
             }
         }
 
+        /**
+         * A class to execute queries sent from
+         * Scenarios class
+         * @param sql The string passed
+         * @return the query to be executed
+         */
+
         public ResultSet query(String sql) throws SQLException {
             return stmt.executeQuery(sql);
         }
 
-        public int update(String sql) throws SQLException {
-            return stmt.executeUpdate(sql);
-        }
     }

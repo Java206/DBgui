@@ -1,5 +1,4 @@
 package GUI;
-import DataBase.dataBase;
 
 import java.awt.Font;
 import java.awt.Toolkit;
@@ -17,9 +16,10 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 /**
- * User Registration using Swing
- * @author javaguides.net
+ * A second frame that will register a new
+ * Library member
  *
+ * @author Abrham Takele
  */
 public class newMemberWindow extends JFrame {
     @Serial
@@ -30,12 +30,13 @@ public class newMemberWindow extends JFrame {
     private final JTextField lastname;
     private final JTextField email;
     private final JTextField address;
-    private final JTextField mob;
+    private final JTextField phoneNo;
     private final JTextField zipCode;
     private final JButton btnNewButton;
 
     /**
      * Create the frame.
+     * And Run the second frame
      */
 
     public newMemberWindow() {
@@ -118,11 +119,11 @@ public class newMemberWindow extends JFrame {
         contentPane.add(address);
         address.setColumns(10);
 
-        mob = new JTextField();
-        mob.setFont(new Font("Tahoma", Font.PLAIN, 32));
-        mob.setBounds(707, 320, 228, 50);
-        contentPane.add(mob);
-        mob.setColumns(10);
+        phoneNo = new JTextField();
+        phoneNo.setFont(new Font("Tahoma", Font.PLAIN, 32));
+        phoneNo.setBounds(707, 320, 228, 50);
+        contentPane.add(phoneNo);
+        phoneNo.setColumns(10);
 
         zipCode = new JTextField();
         zipCode.setFont(new Font("Tahoma", Font.PLAIN, 32));
@@ -132,11 +133,10 @@ public class newMemberWindow extends JFrame {
         btnNewButton = new JButton("Register");
         btnNewButton.addActionListener(e -> {
             String user = userId.getText();
-            int id = user.length();
             String firstName = firstname.getText();
             String lastName = lastname.getText();
             String emailId = email.getText();
-            String mobileNumber = mob.getText();
+            String mobileNumber = phoneNo.getText();
             int len = mobileNumber.length();
             String addr = address.getText();
             String zip = zipCode.getText();
@@ -151,7 +151,6 @@ public class newMemberWindow extends JFrame {
             if (len1 != 5) {
                 JOptionPane.showMessageDialog(btnNewButton, "Enter a valid mobile number");
             }
-            dataBase data = new dataBase();
 
             try {
                 Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Takele_Abrham_db", "root", "ABab1234");
@@ -166,7 +165,8 @@ public class newMemberWindow extends JFrame {
                 } else {
                     JOptionPane.showMessageDialog(btnNewButton,
                             "Welcome, " + msg + "Your account is successfully created");
-                    userId.setText(""); firstname.setText("");lastname.setText("");email.setText("");mob.setText("");address.setText("");zipCode.setText("");
+                    userId.setText(""); firstname.setText("");lastname.setText("");email.setText("");
+                    phoneNo.setText("");address.setText("");zipCode.setText("");
                 }
                 connection.close();
             }

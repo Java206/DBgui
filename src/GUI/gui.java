@@ -1,7 +1,6 @@
 package GUI;
 
 import DataBase.Scenarios;
-import DataBase.dataBase;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,19 +9,29 @@ import java.awt.event.ActionListener;
 import java.io.Serial;
 import java.sql.SQLException;
 
+/**
+ * A class where all the gui components are stored
+ * This is where the first window is created
+ *
+ * @author Abrham Takele
+ */
 public class gui extends JFrame implements ActionListener {
 
     @Serial
     private static final long serialVersionUID = 7250653526959884601L;
 
     // declare some things we need
-    private JLabel introLbl, lbl1, lbl2, lbl3, lbl4, lbl5, lbl6, lbl7;
-    public JTextField txtfld1, txtfld2, txtfld3, txtfld4, txtfld5, txtfld6, txtfld7;
+    private JLabel introLbl, lbl1, lbl2;
+    public JTextField txtfld1, txtfld2;
     private JButton btn1, btn2;
     private JTextArea txtArea1;
     public Scenarios scenarios = new Scenarios();
 
-        public void createGUI () {
+    /**
+     * A class to create and send to main to be run
+     *
+     */
+    public void createGUI () {
 
 
             // make window object
@@ -36,7 +45,11 @@ public class gui extends JFrame implements ActionListener {
             GUI.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         }
 
-        public void init () {
+    /**
+     * creates all the inside components of
+     * the frame
+     */
+    public void init () {
 
 
             // create container to hold GUI in window
@@ -64,40 +77,6 @@ public class gui extends JFrame implements ActionListener {
             txtfld2 = new JTextField();
             txtfld2.setBounds(120, 100, 100, 25);
 
-            // 3
-            lbl3 = new JLabel("Reserve Date");
-            lbl3.setFont(new Font("Tahoma", Font.PLAIN, 20));
-            lbl3.setBounds(10, 140, 100, 25);
-            txtfld3 = new JTextField();
-            txtfld3.setBounds(120, 140, 100, 25);
-
-            // 4
-            lbl4 = new JLabel("Hold");
-            lbl4.setFont(new Font("Tahoma", Font.PLAIN, 20));
-            lbl4.setBounds(10, 180, 100, 25);
-            txtfld4 = new JTextField();
-            txtfld4.setBounds(120, 180, 100, 25);
-
-            // 5
-            lbl5 = new JLabel("Genre ID");
-            lbl5.setFont(new Font("Tahoma", Font.PLAIN, 20));
-            lbl5.setBounds(10, 220, 100, 25);
-            txtfld5 = new JTextField();
-            txtfld5.setBounds(120, 220, 100, 25);
-
-            // 6
-            lbl6 = new JLabel("Inventory");
-            lbl6.setFont(new Font("Tahoma", Font.PLAIN, 20));
-            lbl6.setBounds(10, 260, 100, 25);
-            txtfld6 = new JTextField();
-            txtfld6.setBounds(120, 260, 100, 25);
-
-            // 7
-            lbl7 = new JLabel("Vendor ID");
-            lbl7.setFont(new Font("Tahoma", Font.PLAIN, 20));
-            lbl7.setBounds(10, 300, 100, 25);
-            txtfld7 = new JTextField();
-            txtfld7.setBounds(120, 300, 100, 25);
 
             // generate button
             btn2 = new JButton("New Memeber");
@@ -122,6 +101,11 @@ public class gui extends JFrame implements ActionListener {
             //JTextField function=new JTextField();
             txtfld1.addActionListener(new ActionListener(){
 
+                /**
+                 * Listen to when type in a query from
+                 * the text field
+                 * @param e our listener
+                 */
                 public void actionPerformed(ActionEvent e){
                     String s1;
 
@@ -138,6 +122,11 @@ public class gui extends JFrame implements ActionListener {
 
             txtfld2.addActionListener(new ActionListener(){
 
+                /**
+                 * Listen to when type in a query from
+                 * the text field
+                 * @param e our listener
+                 */
                 public void actionPerformed(ActionEvent e){
                     String s2;
 
@@ -156,28 +145,13 @@ public class gui extends JFrame implements ActionListener {
             pane.add(introLbl);
             pane.add(lbl1);
             pane.add(lbl2);
-            pane.add(lbl3);
-            pane.add(lbl4);
-            pane.add(lbl5);
-            pane.add(lbl6);
-            pane.add(lbl7);
             pane.add(txtfld1);
             pane.add(txtfld2);
-            pane.add(txtfld3);
-            pane.add(txtfld4);
-            pane.add(txtfld5);
-            pane.add(txtfld6);
-            pane.add(txtfld7);
             pane.add(btn2);
             pane.add(txtArea1);
         }
-
-
-        //handles action and all the things ^_^
-
         @Override
         public void actionPerformed (ActionEvent e){
-
-        }
+    }
 
 }
