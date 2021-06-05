@@ -1,15 +1,14 @@
 package GUI;
 
-
-import DataBase.dataBase;
 import DataBase.Scenarios;
+import DataBase.dataBase;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.Serial;
-import java.sql.*;
+import java.sql.SQLException;
 
 public class gui extends JFrame implements ActionListener {
 
@@ -21,6 +20,7 @@ public class gui extends JFrame implements ActionListener {
     public JTextField txtfld1, txtfld2, txtfld3, txtfld4, txtfld5, txtfld6, txtfld7;
     private JButton btn1, btn2;
     private JTextArea txtArea1;
+    public Scenarios scenarios = new Scenarios();
 
         public void createGUI () {
 
@@ -100,11 +100,6 @@ public class gui extends JFrame implements ActionListener {
             txtfld7.setBounds(120, 300, 100, 25);
 
             // generate button
-            btn1 = new JButton("button!");
-            btn1.setFont(new Font("Tahoma", Font.PLAIN, 20));
-            btn1.setBounds(10, 350, 100, 20);
-
-            // generate button
             btn2 = new JButton("New Memeber");
             btn2.setFont(new Font("Tahoma", Font.PLAIN, 20));
             btn2.setBounds(375, 500, 200, 25);
@@ -119,10 +114,43 @@ public class gui extends JFrame implements ActionListener {
             //add listener to button
             btn2.addActionListener(this);
 
-            //text area output (with formatted font)
-            txtArea1 = new JTextArea("hello!");
+
+            txtArea1 = new JTextArea();
             txtArea1.setFont(new Font("Tahoma", Font.PLAIN, 20));
             txtArea1.setBounds(350, 20, 500, 350);
+
+            //JTextField function=new JTextField();
+            txtfld1.addActionListener(new ActionListener(){
+
+                public void actionPerformed(ActionEvent e){
+                    String s1;
+
+                    s1  = txtfld1.getText();
+                    txtArea1.setText("Member Id entered: " + s1);
+                    try {
+                      //  scenarios.getMemberInfo();
+                        txtArea1.setText(scenarios.getMemberInfo(s1));
+                    } catch (SQLException ev) {
+                        ev.printStackTrace();
+                    }
+
+                }});
+
+            txtfld2.addActionListener(new ActionListener(){
+
+                public void actionPerformed(ActionEvent e){
+                    String s2;
+
+                    s2  = txtfld2.getText();
+                    txtArea1.setText("Member Id entered: " + s2);
+                    try {
+                        //  scenarios.getMemberInfo();
+                        txtArea1.setText(scenarios.book(s2));
+                    } catch (SQLException ev) {
+                        ev.printStackTrace();
+                    }
+
+                }});
 
             //add all of the things to the pane
             pane.add(introLbl);
@@ -140,7 +168,6 @@ public class gui extends JFrame implements ActionListener {
             pane.add(txtfld5);
             pane.add(txtfld6);
             pane.add(txtfld7);
-            pane.add(btn1);
             pane.add(btn2);
             pane.add(txtArea1);
         }
@@ -150,31 +177,7 @@ public class gui extends JFrame implements ActionListener {
 
         @Override
         public void actionPerformed (ActionEvent e){
-//
-//            btn2.addActionListener(new ActionListener() {
-//                @Override
-//                public void actionPerformed(ActionEvent e) {
-//                    txtArea1.setText("It worked!!!");
-//                }
-//            });
 
-//            try {
-//                //parse some data from input
-//                int temp1 = Integer.parseInt(txtfld1.getText());
-//                int temp2 = Integer.parseInt(txtfld2.getText());
-//
-//                //do what we want to do with whatever data
-//
-//
-//                //basic error catching
-//            } catch (NumberFormatException ex) {
-//                System.out.println("Exception: " + ex);
-//                JOptionPane.showMessageDialog(this, "Please enter a warning message");
-//            } catch (ArrayIndexOutOfBoundsException ex) {
-//                //warnings..
-//            } catch (NegativeArraySizeException ex) {
-//                //warnings..
-//            }
         }
 
 }

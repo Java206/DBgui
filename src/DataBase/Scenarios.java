@@ -1,29 +1,64 @@
 package DataBase;
 
-import GUI.gui;
-import GUI.newMemberWindow;
-
 import java.sql.*;
 
 public class Scenarios {
     public dataBase data;
-    public Scenarios(){ }
-
-    public String memberTable() throws SQLException {
-        newMemberWindow nwGUI = new newMemberWindow();
-
-        String sql =  "INSERT INTO Member VALUES (101, 'LeBron', 'James', 'KingJames23@Lakers.org', 2069896542, '68446', 56874)";
-       // String sql2 = "INSERT INTO Member VALUES (564, " + nwGUI
-        return sql;
+    public Scenarios(){
+        data = new dataBase();
     }
 
-    public String getMemberInfo() {
-        gui n = new gui();
-        String s1 = "546";
-        //  s1      = n.txtfld1.getText();
+    public String getMemberInfo(String s1) throws SQLException {
 
-        String sql =  "INSERT INTO Member VALUES (" + s1 + ", 'LeBron', 'James', 'KingJames23@Lakers.org', 2069896542, '68446', 56874)";
+        String query = "select * from Member where User_Id = " + s1 ;
+        ResultSet result = data.query(query);
+        if(result == null) System.out.println("Wrong ID");
 
-        return sql;
+        StringBuilder s = new StringBuilder();
+        while(true) {
+            assert result != null;
+            if (!result.next()) break;
+            int userid = result.getInt("User_Id");
+            String fName  = result.getString("Fname");
+            String lName  = result.getString("Lname");
+            String email  = result.getString("Email");
+            int phoneNO = result.getInt("Phone_no");
+            String add  = result.getString("Address");
+            int zip = result.getInt("ZipCode");
+
+            s.append("User_ID: ").append(userid).append("\n FName: " +
+                    "").append(fName).append("\n LName: ").append(lName).
+                    append("\n Email: ").append(email).append("\n Phone_no: " +
+                    "").append(phoneNO).append("\n Address: ").append(add).append(
+                            "\n ZipCode: ").append(zip);
+        }
+
+        return s.toString();
+    }
+
+    public String book(String s2) throws SQLException {
+
+        String bookQuery = "select * from Book where ISBN_Number = " + s2 ;
+        ResultSet bookResult = data.query(bookQuery);
+        if(bookResult == null) System.out.println("Wrong ISBN_no");
+
+        StringBuilder s = new StringBuilder();
+        while(true) {
+            assert bookResult != null;
+            if (!bookResult.next()) break;
+            int isbn_number= bookResult.getInt("ISBN_Number");
+            String title  = bookResult.getString("Title");
+            String authorFname  = bookResult.getString("AuthorFname");
+            String authorLname  = bookResult.getString("AuthorLname");
+            String edition = bookResult.getString("Edition");
+            String category  = bookResult.getString("Category");
+
+            s.append("ISBN_Number: ").append(isbn_number).append("\nTitle: ").
+                    append(title).append("\n AuthorFname: ").append(authorFname).
+                    append("\n AuthorLname: ").append(authorLname).append("\n Edition: ").
+                    append(edition).append("\n Category: ").append(category);
+        }
+
+        return s.toString();
     }
 }

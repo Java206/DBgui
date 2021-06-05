@@ -1,4 +1,6 @@
 package GUI;
+import DataBase.dataBase;
+
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.io.Serial;
@@ -149,12 +151,14 @@ public class newMemberWindow extends JFrame {
             if (len1 != 5) {
                 JOptionPane.showMessageDialog(btnNewButton, "Enter a valid mobile number");
             }
+            dataBase data = new dataBase();
 
             try {
                 Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Takele_Abrham_db", "root", "ABab1234");
 
                 String query = "INSERT INTO Member values('" + user + "','" + firstName + "','" + lastName + "','" + emailId + "','" +
                         mobileNumber + "','" + addr + "','" + zip + "')";
+
                 Statement sta = connection.createStatement();
                 int x = sta.executeUpdate(query);
                 if (x == 0) {
